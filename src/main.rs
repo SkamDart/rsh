@@ -3,7 +3,7 @@ pub mod shell;
 fn main() {
     loop {
         shell::print_prompt();
-        let command = shell::wait_for_command();
-        shell::execute(command);
+        let user_input = shell::wait_for_command();
+        shell::handle(user_input);
     }
 }
