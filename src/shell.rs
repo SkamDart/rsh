@@ -9,8 +9,11 @@ struct Command {
     args: Vec<String>
 }
 
+pub fn handle(command: String) {
+    // parse
+}
+
 pub fn execute(command: String) {
-    println!("Executing {}", command);
 }
 
 pub fn print_prompt() {
