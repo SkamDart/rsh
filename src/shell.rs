@@ -12,18 +12,17 @@ struct Command {
 pub fn touch(path: &Path) -> io::Result<()> {
     match OpenOptions::new().create(true).write(true).open(path) {
         Ok(_) => Ok(()),
-        Err(e) => Err(e)
+        Err(e) => Err(e),
     }
 }
 
 // cat
-pub fn cat(path: &Path) -> io::Result<()> {
+fn cat(path: &Path) -> io::Result<String> {
     let mut f = File::open(path)?;
     let mut s = String::new();
-    match f.read_to_string(&mut s) {
-        Ok(_) => Ok(()),
-        Err(e) => Err(e),
-    }
+    f.read_to_string(&mut s)?;
+    println!("{:?}", s);
+    Ok(s)
 }
 
 fn input_as_command(user_input: String) -> Command {
@@ -52,8 +51,10 @@ fn vec_as_str(vec: Vec<String>) -> String {
 
 pub fn handle(user_input: String) {
     let cmd: Command = input_as_command(user_input);
-    let foo = vec_as_str(cmd.args);
-    let path = Path::new(&foo);
+    // hax
+    let path_str = vec_as_str(cmd.args);
+    let path = Path::new(&path_str);
+    // hax
     if cmd.name == "cat" {
         cat(path).unwrap();
     } else if cmd.name == "touch" {
