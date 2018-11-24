@@ -21,28 +21,39 @@ pub struct JobOptions {
 pub struct JobResult {
     id: u32,
     pid: u32,
+    return_code: i32
+}
+
+impl JobOptions {
+    pub fn new() -> JobOptions {
+        JobOptions {
+            err_fd: 2,
+            flags: Vec::new(),
+            in_fd: 0,
+            out_fd: 1,
+        }
+    }
 }
 
 impl Job {
-    pub fn new() {
+    pub fn new() -> Job {
         Job {
-            in_fd: 0,
-            out_fd: 1,
-            err_fd: 2,
-            opts: JobOptions,
-            pid: None,
-            gid: None,
+            cmd: String::new(),
+            gid: 0,
+            id: 0,
+            opts: JobOptions::new(),
+            pid: 0,
             status: String::new(),
         }
     }
 }
 
-impl JobOptions {
-    pub fn new() {
-        JobOptions {
-            id: None
-            in_fd: 0,
-            out_fd: 1,
+impl JobResult {
+    pub fn new() -> JobResult {
+        JobResult {
+            id: 0,
+            pid: 0,
+            return_code: 0,
         }
     }
 }

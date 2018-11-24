@@ -1,4 +1,5 @@
-pub mod shell;
+mod shell;
+mod job;
 
 fn main() {
     loop {

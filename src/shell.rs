@@ -1,3 +1,4 @@
+
 use std::fs::{File, OpenOptions};
 use std::io;
 use std::io::prelude::*;
@@ -18,6 +19,7 @@ pub fn touch(path: &Path) -> io::Result<()> {
 
 // cat
 fn cat(path: &Path) -> io::Result<String> {
+    // TODO - Don't panic. Handle gracefully.
     let mut f = File::open(path)?;
     let mut s = String::new();
     f.read_to_string(&mut s)?;
